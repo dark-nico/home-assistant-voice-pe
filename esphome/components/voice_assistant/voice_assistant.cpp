@@ -922,7 +922,7 @@ const Configuration &VoiceAssistant::get_configuration() {
 
 #ifdef USE_MICRO_WAKE_WORD
   if (this->micro_wake_word_) {
-    this->config_.max_active_wake_words = 1;
+    this->config_.max_active_wake_words = 3;
 
     for (auto &model : this->micro_wake_word_->get_wake_words()) {
       if (model->is_enabled()) {
