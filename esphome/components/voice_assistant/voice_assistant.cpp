@@ -902,15 +902,11 @@ void VoiceAssistant::on_set_configuration(const std::vector<std::string> &active
     for (auto &model : this->micro_wake_word_->get_wake_words()) {
       model->disable();
     }
-
-    // Enable only active wake words
-    for (auto ww_id : active_wake_words) {
-      for (auto &model : this->micro_wake_word_->get_wake_words()) {
-        if (model->get_id() == ww_id) {
-          model->enable();
-          ESP_LOGD(TAG, "Enabled wake word: %s (id=%s)", model->get_wake_word().c_str(), model->get_id().c_str());
-        }
-      }
+    
+    // enable all available wake word models to allow multiple wake words to be active.
+    for (auto &model : this->micro_wake_word_->get_wake_words()) {
+      model->enable();
+      ESP_LOGD(TAG, "Enabled wake word: %s (id=%s)", model->get_wake_word().c_str(), model->get_id().c_str());
     }
   }
 #endif
